@@ -2,7 +2,7 @@
 
 ![Executive Dashboard Preview](powerbi/dashboard_page1_Executive.png)
 
-> **Impact Statement:** This project demonstrates my ability to translate raw user behavior data into actionable product strategy and executive-level reporting.
+> **Impact Statement:** This project demonstrates my ability to translate raw user behavior data into actionable product strategy and executive-level reporting. These insights are intended to guide product and marketing decisions, not just describe user behavior.
 
 ## TL;DR for Recruiters
 * **Tools:** Analyzed a 33-user fitness dataset using SQL, Python, and Power BI.
@@ -25,9 +25,9 @@
 ---
 
 ## What This Project Is About
-Bellabeat is a women's wellness technology company that makes smart fitness trackers, apps, and health-monitoring devices. Like most companies in this space, they have a wealth of product data — but the real question is: *how are people actually using these devices, and what does that tell us about where the product needs to go?*
+Bellabeat needed to understand how users actually engage with fitness devices — not just what the data shows, but what actions it should drive.
 
-This project uses publicly available FitBit fitness tracker data to answer that question. By analyzing real user behavior across daily activity, sleep patterns, and hourly movement, the goal is to give Bellabeat's team actionable product insights.
+This project uses publicly available FitBit fitness tracker data to answer that question. By analyzing real user behavior across daily activity, sleep patterns, and hourly movement, the goal is to give Bellabeat's team actionable product insights. 
 
 The analysis follows Google's six-phase data analytics framework: **Ask → Prepare → Process → Analyze → Share → Act.**
 
@@ -63,52 +63,41 @@ The activity heatmap reveals that user behavior differs fundamentally between we
 **3. Build two independent coaching algorithms — one for activity, one for sleep**
 With a steps-to-sleep correlation of −0.22, Bellabeat cannot assume that activity coaching will automatically improve sleep. The two dimensions require their own logic, their own goals, and their own communication strategies inside the app.
 
+> 🚀 **Expected Business Impact (Hypothesis):**
+> * Shifting focus to "Active Minutes" could improve user calorie-burn efficiency by an estimated 20–30%.
+> * Implementing day-type, time-based notifications will likely increase app engagement rates during historically proven peak hours.
+> * Decoupling sleep and activity coaching will create a more personalized user experience, directly reducing churn among users who feel standard goals don't fit their lifestyle.
+
 ---
 
 ## How the Analysis Was Built
 
-### Phase 1 — Ask
-Defined the business task: analyze competitor FitBit data to identify how consumers use smart fitness devices to guide Bellabeat's marketing strategy.
-* **Stakeholders:** Urška Sršen (Co-founder & CCO) and Sando Mur (Co-founder)
-
-### Phase 2 — Prepare
-Assessed the data before touching it. Key limitations acknowledged upfront:
-* Sample size of 33 users is below statistical significance threshold
-* Sleep data covers only 24 of 33 users (72.7% coverage)
-* Self-selection bias possible — motivated users may be overrepresented
+### Phase 1 & 2 — Ask & Prepare
+Defined the business task: analyze competitor FitBit data to identify how consumers use smart fitness devices.
+* **Key Limitations:** Sample size of 33 users is below statistical significance; sleep data covers only 24 of 33 users (72.7% coverage); self-selection bias is possible.
 *(Data source: FitBit Fitness Tracker Dataset via Kaggle, Motivate International Inc.)*
 
 ### Phase 3 — Process (SQL)
 **Tool:** MySQL 8.0 via MySQL Workbench
-Used SQL for the first layer of analysis — establishing benchmarks and answering 8 structured business questions. 
-* **Data Cleaning Highlights:**
-  * Removed duplicate records using `DISTINCT` checks.
-  * Identified and documented missing sleep records (27% null rate).
-  * Standardized date formatting using `STR_TO_DATE` for accurate time-series analysis.
-* **Key SQL techniques used:** `COUNT DISTINCT`, `GROUP BY`, `CTE (WITH clause)`, `CASE WHEN`, `ROUND`
-
-→ See [`sql/bellabeat_exploration.sql`](./sql/bellabeat_exploration.sql)  
-→ Query screenshots: [`sql/outputs/`](./sql/outputs/)
+Used SQL to establish benchmarks and answer 8 structured business questions. 
+* **Data Cleaning:** Removed duplicates using `DISTINCT`, identified missing sleep records (27% null rate), and standardized date formatting using `STR_TO_DATE`.
+* **Key Techniques:** `COUNT DISTINCT`, `GROUP BY`, `CTE`, `CASE WHEN`
+→ [See sql/bellabeat_exploration.sql](./sql/bellabeat_exploration.sql)  
 
 ### Phase 4 — Analyze (Python)
 **Tool:** Python 3 via Google Colab | **Libraries:** pandas, matplotlib
 Ran 14 analyses across three datasets. Segmented users by activity level, merged datasets to test cross-variable relationships, and generated the core visualizations.
-* **Key Python techniques:** `pd.read_csv`, `groupby`, `merge`, `cut`, `dt.day_name`, `matplotlib scatter/bar`
-
-→ See [`python/bellabeat_analysis.ipynb`](./python/bellabeat_analysis.ipynb)  
-→ Output charts: [`python/charts/`](./python/charts/)
+* **Key Techniques:** `pd.read_csv`, `groupby`, `merge`, `cut`, `matplotlib`
+→ [See python/bellabeat_analysis.ipynb](./python/bellabeat_analysis.ipynb)  
 
 ### Phase 5 — Share (Power BI)
 **Tool:** Microsoft Power BI Desktop | **Live link:** [Interactive Dashboard](https://tinyurl.com/bellabeat-ritwik)
-Built a 4-page interactive dashboard tailored for different organizational stakeholders.
-* **Page 1 — Executive Summary:** Three KPI gauges show the core wellness gap. Donut chart segments users by activity level.
-* **Page 2 — Manager Dashboard:** The 47:1 sedentary-to-active bar chart and a steps-vs-calories scatter.
-* **Page 3 — User Engagement:** A custom Activity Heatmap (Day × Hour matrix) revealing the weekday vs. weekend behavioral split.
-* **Page 4 — Analyst Deep Dive:** Transparent data coverage stats and top/bottom user comparison tables.
+Built a 4-page interactive dashboard tailored for different stakeholders:
+* **Executive Summary:** KPI gauges showing the core wellness gap and user segmentation.
+* **Manager Dashboard:** The 47:1 sedentary-to-active bar chart and a steps-vs-calories scatter plot.
+* **User Engagement:** A custom Activity Heatmap revealing the weekday vs. weekend split.
+* **Data Quality:** Transparent data coverage stats and user comparison tables.
 * **DAX measures used:** `AVERAGE`, `DIVIDE`, `COUNTROWS`, `SUMMARIZE`, `FILTER`, `SWITCH`
-
-→ Dashboard screenshots: [`powerbi/`](./powerbi/)  
-→ Power BI file: [`powerbi/BellaBeat_Project.pbix`](./powerbi/BellaBeat_Project.pbix)
 
 ### Phase 6 — Act
 Three strategic recommendations derived directly from the data (see the [Recommendations section above](#three-recommendations-for-bellabeat)).
