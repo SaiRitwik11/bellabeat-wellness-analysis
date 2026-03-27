@@ -27,7 +27,7 @@
 ## What This Project Is About
 Bellabeat needed to understand how users actually engage with fitness devices — not just what the data shows, but what actions it should drive.
 
-This project uses publicly available FitBit data to answer that question. By analyzing real user behavior across daily activity, sleep patterns, and hourly movement, the goal is to give Bellabeat's team actionable product insights. 
+This project uses publicly available FitBit data to answer that question. By analyzing real user behavior across daily activity, sleep patterns, and hourly movement, the goal is to provide actionable insights that can inform product and marketing decisions.
 
 The analysis follows Google's six-phase framework: **Ask → Prepare → Process → Analyze → Share → Act.**
 
@@ -52,6 +52,8 @@ I went in expecting to find that more active users sleep better. The data disagr
 
 The last finding was the most important one. A correlation of −0.22 between steps and sleep means the two are essentially independent. This suggests Bellabeat should reconsider the assumption that activity directly improves sleep.
 
+## Key Takeaway
+User activity and sleep function as independent systems — requiring separate product strategies rather than a unified wellness approach.
 ---
 
 ## Three Recommendations for Bellabeat
